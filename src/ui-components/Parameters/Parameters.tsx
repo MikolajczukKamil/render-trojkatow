@@ -2,9 +2,9 @@ import React, { useContext } from 'react'
 import { Button, Typography } from '@material-ui/core'
 import MenuItem from '@material-ui/core/MenuItem'
 
-import { SettingsControll } from './SettingsControll'
+import { SettingsControll } from '../SettingsControll'
 
-import { Axis } from '../zadanie'
+import { Axis } from '../../zadanie'
 import {
   AXIS,
   FOCALS,
@@ -12,9 +12,9 @@ import {
   PIXEL_SIZES,
   PROJECTIONS,
   SIZES,
-} from '../data/availableValues'
+} from '../../data/availableValues'
 import { ParametersContext } from './Parameters.context'
-import { TriangleEditor } from './TriangleEditor'
+import { TriangleEditor } from '../TriangleEditor'
 
 export function Parameters() {
   const {

@@ -6,8 +6,8 @@ import Typography from '@material-ui/core/Typography'
 
 import { flatColors } from './utils'
 import { Render, Bitmap, Camera } from './zadanie'
-import { Parameters } from './ui-components/Parameters'
-import { ParametersContext } from './ui-components/Parameters.context'
+import { Parameters } from './ui-components/Parameters/Parameters'
+import { ParametersContext } from './ui-components/Parameters/Parameters.context'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

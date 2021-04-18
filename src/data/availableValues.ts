@@ -18,6 +18,8 @@ export const PROJECTIONS: Projection[] = [
 ]
 
 export const FOCALS: number[] = [
+  0.01,
+  0.05,
   0.1,
   0.25,
   0.5,
@@ -32,6 +34,9 @@ export const FOCALS: number[] = [
   5,
   10,
   20,
+  30,
+  50,
+  100,
 ]
 
 export const PIXEL_SIZES: number[] = [
@@ -58,4 +63,5 @@ export const SIZES: Size[] = [
   { width: 400, height: 400, code: '400x400' },
   { width: 512, height: 512, code: '512x512' },
   { width: 1024, height: 1024, code: '1024x1024' },
+  { width: 400, height: 200, code: '400x200' },
 ]

@@ -4,7 +4,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import { Button } from '@material-ui/core'
 
-import { ParametersContext, TriangleSchema } from './Parameters.context'
+import { ParametersContext, TriangleSchema } from './Parameters/Parameters.context'
 import { Color, Triangle, Vector3AsArray } from '../zadanie'
 import { hexToRgb } from './utils'
 

@@ -1,13 +1,13 @@
 import React, { useCallback, useState, createContext, ReactNode } from 'react'
 
-import { Axis, Color, Triangle, Vector3AsArray } from '../zadanie'
+import { Axis, Color, Triangle, Vector3AsArray } from '../../zadanie'
 import {
   perspectiveProjection,
   PROJECTIONS,
   Size,
   SIZES,
-} from '../data/availableValues'
-import { Projection } from '../zadanie/Projection'
+} from '../../data/availableValues'
+import { Projection } from '../../zadanie/Projection'
 
 let triangleId = 0
 

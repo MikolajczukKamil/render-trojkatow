@@ -4,7 +4,7 @@ import { Camera } from './Objects/Camera'
 import { Bitmapa, Bitmap } from './utils'
 import { Triangle, TriangleCompiled, Vector3 } from './Objects'
 import { Projection } from './Projection'
-import { TriangleSchema } from '../ui-components/Parameters.context'
+import { TriangleSchema } from '../ui-components/Parameters/Parameters.context'
 
 export function Render(
   trianglesSchemas: TriangleSchema[],
@@ -27,12 +27,12 @@ export function Render(
     triangle.transform(projection.transformation(camera)).compile(camera)
   )
 
-  console.log({
-    trianglesSchemas,
-    triangles,
-    notTransformed,
-    transformed,
-  })
+  // console.log({
+  //   trianglesSchemas,
+  //   triangles,
+  //   notTransformed,
+  //   transformed,
+  // })
 
   const img = Bitmapa(width, height)
   const width2 = width / 2
