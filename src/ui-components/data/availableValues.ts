@@ -1,7 +1,9 @@
-import { Axis } from '../zadanie'
-import { ParallelProjection } from '../zadanie/ParallelProjection'
-import { PerspectiveProjection } from '../zadanie/PerspectiveProjection'
-import { Projection } from '../zadanie/Projection'
+import {
+  Axis,
+  Projection,
+  ParallelProjection,
+  PerspectiveProjection,
+} from '../../graphics'
 
 export interface Size {
   width: number

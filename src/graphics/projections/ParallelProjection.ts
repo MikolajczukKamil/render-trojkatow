@@ -1,11 +1,9 @@
-import { Vector3 } from './Objects'
-import { Camera } from './Objects/Camera'
-import { Matrix4 } from './Objects/Matrix4'
+import { Camera } from '../geometry'
+import { Vector3, Matrix4 } from '../math'
 import { Projection } from './Projection'
 
 export class ParallelProjection implements Projection {
   readonly name = 'Równoległe'
-  readonly code = '__parallel_projection__'
 
   private directionV = new Vector3(0, 0, 0)
 

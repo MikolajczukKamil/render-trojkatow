@@ -1,9 +1,9 @@
 import { Matrix4 } from './Matrix4'
-import { Vector3 } from './Vector3'
+import { Vector3, Vector3Like } from './Vector3'
 
 export type Vector4AsArray = [number, number, number, number]
 
-export class Vector4 {
+export class Vector4 implements Vector3Like {
   x: number
   y: number
   z: number

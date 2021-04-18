@@ -4,10 +4,10 @@ import Paper from '@material-ui/core/Paper'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 
+import { Render } from '../Render'
 import { flatColors } from './utils'
-import { Render, Bitmap, Camera } from './zadanie'
-import { Parameters } from './ui-components/Parameters/Parameters'
-import { ParametersContext } from './ui-components/Parameters/Parameters.context'
+import { Bitmap, Camera } from '../graphics'
+import { Parameters, ParametersContext } from './Parameters'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,8 +46,6 @@ export function GraphicCanvas() {
     // @ts-ignore .current - readonly
     if (!ctx.current) ctx.current = canvas.current!.getContext('2d')!
 
-    const imgData: ImageData = ctx.current.getImageData(0, 0, width, height)
-
     const image: Bitmap = Render(
       triangles,
       width,
@@ -57,13 +55,9 @@ export function GraphicCanvas() {
       projection
     )
 
-    const imgData2 = new ImageData(
-      flatColors(image),
-      imgData.width,
-      imgData.height
-    )
+    const imgData = new ImageData(flatColors(image), width, height)
 
-    ctx.current.putImageData(imgData2, 0, 0)
+    ctx.current.putImageData(imgData, 0, 0)
   }, [triangles, axis, focal, pixelSize, projection, width, height])
 
   return (

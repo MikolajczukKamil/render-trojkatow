@@ -1,5 +1,4 @@
-import { Triangle } from './Triangle'
-import { Vector3 } from './Vector3'
+import { Vector3Like } from './Vector3'
 
 function det3(
   a: number, b: number, c: number,
@@ -15,29 +14,29 @@ export class Plane {
     public B: number,
     public C: number,
     public D: number
-  ) {}
+  ) { }
 
-  static of(t: Triangle): Plane {
+  static of(p1: Vector3Like, p2: Vector3Like, p3: Vector3Like): Plane {
     return new Plane(
       det3(
-        t.p1.y, t.p1.z, 1,
-        t.p2.y, t.p2.z, 1,
-        t.p3.y, t.p3.z, 1,
+        p1.y, p1.z, 1,
+        p2.y, p2.z, 1,
+        p3.y, p3.z, 1,
       ),
       -det3(
-        t.p1.x, t.p1.z, 1,
-        t.p2.x, t.p2.z, 1,
-        t.p3.x, t.p3.z, 1,
+        p1.x, p1.z, 1,
+        p2.x, p2.z, 1,
+        p3.x, p3.z, 1,
       ),
       det3(
-        t.p1.x, t.p1.y, 1,
-        t.p2.x, t.p2.y, 1,
-        t.p3.x, t.p3.y, 1,
+        p1.x, p1.y, 1,
+        p2.x, p2.y, 1,
+        p3.x, p3.y, 1,
       ),
       -det3(
-        t.p1.x, t.p1.y, t.p1.z,
-        t.p2.x, t.p2.y, t.p2.z,
-        t.p3.x, t.p3.y, t.p3.z,
+        p1.x, p1.y, p1.z,
+        p2.x, p2.y, p2.z,
+        p3.x, p3.y, p3.z,
       )
     )
   }
@@ -47,7 +46,7 @@ export class Plane {
    * @param v Position vector
    * @param d Directional vector
    */
-  distanceTo2(v: Vector3, d: Vector3) {
+  distanceTo2(v: Vector3Like, d: Vector3Like) {
     const ro =
       (this.A * v.x + this.B * v.y + this.C * v.z + this.D) /
       (this.A * d.x + this.B * d.y + this.C * d.z)

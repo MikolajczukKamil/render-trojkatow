@@ -1,10 +1,15 @@
-import { move } from './move'
-import { RPYT } from './RPYT'
-import { Camera } from './Objects/Camera'
-import { Bitmapa, Bitmap } from './utils'
-import { Triangle, TriangleCompiled, Vector3 } from './Objects'
-import { Projection } from './Projection'
-import { TriangleSchema } from '../ui-components/Parameters/Parameters.context'
+import {
+  Vector3,
+  Projection,
+  translation,
+  RPYRotation,
+  Triangle,
+  TriangleCompiled,
+  Camera,
+  Bitmap,
+  generateBitmap,
+} from './graphics'
+import { TriangleSchema } from './ui-components/TriangleSchema'
 
 export function Render(
   trianglesSchemas: TriangleSchema[],
@@ -15,8 +20,10 @@ export function Render(
   projection: Projection
 ): Bitmap {
   const triangles: Triangle[] = trianglesSchemas.map(
-    ({ triangle, move: _move, rotation }) =>
-      triangle.transform(RPYT(...rotation)).transform(move(..._move))
+    ({ triangle, move, rotation }) =>
+      triangle
+        .transform(RPYRotation(...rotation))
+        .transform(translation(...move))
   )
 
   const notTransformed: TriangleCompiled[] = triangles.map((triangle) =>
@@ -27,14 +34,7 @@ export function Render(
     triangle.transform(projection.transformation(camera)).compile(camera)
   )
 
-  // console.log({
-  //   trianglesSchemas,
-  //   triangles,
-  //   notTransformed,
-  //   transformed,
-  // })
-
-  const img = Bitmapa(width, height)
+  const img = generateBitmap(width, height)
   const width2 = width / 2
   const height2 = width / 2
 

@@ -1,14 +1,13 @@
-import { Matrix4 } from './Objects/Matrix4'
-import { stToRad } from './utils'
+import { Matrix4, stToRad } from '../math/'
 
 /**
- * roll-pitch-yaw
+ * roll-pitch-yaw rotation
  *
- * @param r roll, przechylenie, oś Z
- * @param p pitch, pochylenie, oś Y po roll
- * @param y yaw, odchylenie, oś X po poll i pitch
+ * @param r roll, Z axis
+ * @param p pitch, Y axis, after roll
+ * @param y yaw, X axis after pitch
  */
-export function RPYT(r: number, p: number, y: number): Matrix4 {
+export function RPYRotation(r: number, p: number, y: number): Matrix4 {
   r = stToRad(r)
   p = stToRad(p)
   y = stToRad(y)

@@ -1,4 +1,4 @@
-import {Vector4AsArray} from './Vector4'
+import { Vector4AsArray } from '../math'
 
 export class Color {
   static defaultR = 0
@@ -21,8 +21,7 @@ export class Color {
     public b = Color.defaultB,
     public a = Color.defaultA,
     public buf = Infinity
-  ) {
-  }
+  ) {}
 
   toArray(): Vector4AsArray {
     return [this.r, this.g, this.b, this.a]

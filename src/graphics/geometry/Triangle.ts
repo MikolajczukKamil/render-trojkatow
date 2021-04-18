@@ -1,9 +1,6 @@
 import { Color } from './Color'
-import { Plane } from './Plane'
-import { Vector3, Vector3AsArray } from './Vector3'
-import { Vector4 } from './Vector4'
-import { Matrix4 } from './Matrix4'
 import { Axis, Camera } from './Camera'
+import { Vector3AsArray, Vector4, Matrix4, Plane, Vector3Like } from '../math'
 
 export class Triangle {
   static of(
@@ -27,6 +24,9 @@ export class Triangle {
     public color: Color
   ) {}
 
+  /**
+   * T( M * T.P1,2,3 )
+   */
   transform(M: Matrix4): Triangle {
     return new Triangle(
       this.p1.transform(M),
@@ -36,12 +36,15 @@ export class Triangle {
     )
   }
 
-  clone(): Triangle {
-    return new Triangle(this.p1, this.p2, this.p3, this.color)
-  }
-
+  /**
+   * Calculate extra properties eg plane
+   */
   compile(camera: Camera): TriangleCompiled {
     return new TriangleCompiled(this, camera)
+  }
+
+  clone(): Triangle {
+    return new Triangle(this.p1, this.p2, this.p3, this.color)
   }
 
   toString() {
@@ -61,7 +64,7 @@ export class TriangleCompiled {
   private readonly WL: Vector3AsArray
 
   constructor(public readonly triangle: Triangle, camera: Camera) {
-    this.plane = Plane.of(triangle)
+    this.plane = Plane.of(triangle.p1, triangle.p2, triangle.p3)
 
     const { p1, p2, p3 } = triangle
 
@@ -100,7 +103,7 @@ export class TriangleCompiled {
   /**
    * @param v using only of x, y
    */
-  testInside2d(v: Vector3): boolean {
+  testInside2d(v: Vector3Like): boolean {
     return (
       this.WL[0] * (this.A[0] * v.x + this.B[0] * v.y + this.C[0]) >= 0 &&
       this.WL[1] * (this.A[1] * v.x + this.B[1] * v.y + this.C[1]) >= 0 &&

@@ -1,11 +1,9 @@
-import { Vector3 } from './Objects'
-import { Camera } from './Objects/Camera'
-import { Matrix4 } from './Objects/Matrix4'
+import { Vector3, Matrix4 } from '../math'
+import { Camera } from '../geometry'
 import { Projection } from './Projection'
 
 export class PerspectiveProjection implements Projection {
   readonly name = 'Perspektywiczne'
-  readonly code = '__perspective_projection__'
 
   private directionV = new Vector3(0, 0, 0)
 

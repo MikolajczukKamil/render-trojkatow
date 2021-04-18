@@ -1,12 +1,13 @@
 import React, { ChangeEvent, useContext, useState } from 'react'
-import clsx from 'clsx'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import { Button } from '@material-ui/core'
+import clsx from 'clsx'
 
-import { ParametersContext, TriangleSchema } from './Parameters/Parameters.context'
-import { Color, Triangle, Vector3AsArray } from '../zadanie'
-import { hexToRgb } from './utils'
+import { hexToRgb } from '../utils'
+import { TriangleSchema } from '../../TriangleSchema'
+import { ParametersContext } from '../Parameters.context'
+import { Color, Triangle, Vector3AsArray } from '../../../graphics'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,13 +42,13 @@ export function TriangleEditor({ schema }: TriangleProps) {
   const [rotation, setRotation] = useState(schema.rotation.join(', '))
   const [move, setMove] = useState(() => schema.move.join(', '))
   const [pointA, setPointA] = useState(() =>
-    schema.triangle.p1.toVector3().toArray().join(', ')
+    schema.triangle.p1.toVector3().asArray().join(', ')
   )
   const [pointB, setPointB] = useState(() =>
-    schema.triangle.p2.toVector3().toArray().join(', ')
+    schema.triangle.p2.toVector3().asArray().join(', ')
   )
   const [pointC, setPointC] = useState(() =>
-    schema.triangle.p3.toVector3().toArray().join(', ')
+    schema.triangle.p3.toVector3().asArray().join(', ')
   )
   const [color, setColor] = useState(
     () => '#' + schema.triangle.color.toRGBArray().join('')

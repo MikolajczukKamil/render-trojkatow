@@ -1,7 +1,7 @@
-import { Matrix4, Vector3, Camera } from './Objects'
+import { Matrix4, Vector3 } from '../math'
+import { Camera } from '../geometry'
 
 export interface Projection {
-  readonly code: string
   readonly name: string
 
   /**

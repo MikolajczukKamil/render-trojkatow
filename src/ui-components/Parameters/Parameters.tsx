@@ -2,19 +2,17 @@ import React, { useContext } from 'react'
 import { Button, Typography } from '@material-ui/core'
 import MenuItem from '@material-ui/core/MenuItem'
 
-import { SettingsControll } from '../SettingsControll'
-
-import { Axis } from '../../zadanie'
 import {
   AXIS,
+  SIZES,
   FOCALS,
-  perspectiveProjection,
   PIXEL_SIZES,
   PROJECTIONS,
-  SIZES,
-} from '../../data/availableValues'
+  perspectiveProjection,
+} from '../data/availableValues'
+import { Axis } from '../../graphics'
 import { ParametersContext } from './Parameters.context'
-import { TriangleEditor } from '../TriangleEditor'
+import { SettingsControll, TriangleEditor } from './components'
 
 export function Parameters() {
   const {
@@ -38,10 +36,10 @@ export function Parameters() {
         <SettingsControll
           onChange={handleChangeProjection}
           label="Rzutowanie"
-          value={projection.code}
+          value={projection.name}
         >
           {PROJECTIONS.map((proj) => (
-            <MenuItem key={proj.code} value={proj.code}>
+            <MenuItem key={proj.name} value={proj.name}>
               {proj.name}
             </MenuItem>
           ))}
@@ -85,7 +83,7 @@ export function Parameters() {
           ))}
         </SettingsControll>
 
-        {projection.code === perspectiveProjection.code && (
+        {projection.name === perspectiveProjection.name && (
           <SettingsControll
             onChange={handleChangeFocal}
             label="Ogniskowa"
