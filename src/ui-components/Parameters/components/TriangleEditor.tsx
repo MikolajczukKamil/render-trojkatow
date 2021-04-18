@@ -42,13 +42,13 @@ export function TriangleEditor({ schema }: TriangleProps) {
   const [rotation, setRotation] = useState(schema.rotation.join(', '))
   const [move, setMove] = useState(() => schema.move.join(', '))
   const [pointA, setPointA] = useState(() =>
-    schema.triangle.p1.toVector3().asArray().join(', ')
+    schema.triangle.p1.asVector3Array().join(', ')
   )
   const [pointB, setPointB] = useState(() =>
-    schema.triangle.p2.toVector3().asArray().join(', ')
+    schema.triangle.p2.asVector3Array().join(', ')
   )
   const [pointC, setPointC] = useState(() =>
-    schema.triangle.p3.toVector3().asArray().join(', ')
+    schema.triangle.p3.asVector3Array().join(', ')
   )
   const [color, setColor] = useState(
     () => '#' + schema.triangle.color.toRGBArray().join('')

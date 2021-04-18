@@ -8,7 +8,7 @@ export class ParallelProjection implements Projection {
   private directionV = new Vector3(0, 0, 0)
 
   /**
-   * Macierz transformacji perspektywicznej
+   * Perspective transformation matrix
    */
   transformation(camera: Camera): Matrix4 {
     return new Matrix4([
@@ -20,7 +20,7 @@ export class ParallelProjection implements Projection {
   }
 
   /**
-   * Odwraca ustawia oś na 1, reszta 0
+   * Set axis on 1, other 0
    */
   directionVector(_position: Vector3, camera: Camera): Vector3 {
     this.directionV.x = 0

@@ -1,7 +1,5 @@
 import { Matrix4 } from './Matrix4'
-import { Vector3, Vector3Like } from './Vector3'
-
-export type Vector4AsArray = [number, number, number, number]
+import { Vector3AsArray, Vector3Like } from './Vector3'
 
 export class Vector4 implements Vector3Like {
   x: number
@@ -17,7 +15,7 @@ export class Vector4 implements Vector3Like {
   }
 
   /**
-   * @param w = 1, współrzędne jednorodne
+   * w = 1, homogeneous coordinates
    */
   static of(x: number, y: number, z: number, w = 1): Vector4 {
     return new Vector4(x, y, z, w)
@@ -38,16 +36,8 @@ export class Vector4 implements Vector3Like {
     )
   }
 
-  toVector3(): Vector3 {
-    return new Vector3(this.x, this.y, this.z)
-  }
-
-  toArray(): Vector4AsArray {
-    return [this.x, this.y, this.z, this.w]
-  }
-
-  clone() {
-    return new Vector4(this.x, this.y, this.z, this.w)
+  asVector3Array(): Vector3AsArray {
+    return [this.x, this.y, this.z]
   }
 
   toString(): string {

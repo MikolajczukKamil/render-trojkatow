@@ -43,10 +43,6 @@ export class Triangle {
     return new TriangleCompiled(this, camera)
   }
 
-  clone(): Triangle {
-    return new Triangle(this.p1, this.p2, this.p3, this.color)
-  }
-
   toString() {
     return [this.p1.toString(), this.p2.toString(), this.p3.toString()].join(
       '\n'

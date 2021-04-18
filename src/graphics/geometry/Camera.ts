@@ -6,8 +6,8 @@ export enum Axis {
 
 export class Camera {
   /**
-   * @param f ogniskowa
-   * @param axis oś w jakiej jest ustawiona kamera
+   * @param f focal
+   * @param axis viewport
    */
   constructor(public f: number, public axis = Axis.z) {}
 }

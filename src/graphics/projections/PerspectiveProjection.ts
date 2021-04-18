@@ -8,7 +8,7 @@ export class PerspectiveProjection implements Projection {
   private directionV = new Vector3(0, 0, 0)
 
   /**
-   * Macierz transformacji perspektywicznej
+   * Perspective transformation matrix
    */
   transformation(camera: Camera): Matrix4 {
     return new Matrix4([
@@ -22,7 +22,7 @@ export class PerspectiveProjection implements Projection {
   }
 
   /**
-   * Odwraca kierunek dla innych osi i ustawia oś na 1
+   * Reverses the direction and for the axis sets 1
    */
   directionVector(position: Vector3, camera: Camera): Vector3 {
     this.directionV.x = -position.x

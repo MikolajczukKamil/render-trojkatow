@@ -10,7 +10,7 @@ export interface Projection {
   transformation(camera: Camera): Matrix4
 
   /**
-   * transformation vektor
+   * transformation vector
    */
   directionVector(position: Vector3, camera: Camera): Vector3
 }

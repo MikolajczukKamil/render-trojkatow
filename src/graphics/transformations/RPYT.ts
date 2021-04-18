@@ -1,4 +1,4 @@
-import { Matrix4, stToRad } from '../math/'
+import { Matrix4, stToRad } from '../math'
 
 /**
  * roll-pitch-yaw rotation
@@ -20,7 +20,7 @@ export function RPYRotation(r: number, p: number, y: number): Matrix4 {
   const C3 = Math.cos(y)
 
   /**
-   * Do przekopiowania jak formatowanie się rozjedzie
+   * Only for formatting
    * 
     [
       C1 * C2,   C1 * S2 * S3 - S1 * C3,  C1 * S2 * C3 + S1 * S3,  0,

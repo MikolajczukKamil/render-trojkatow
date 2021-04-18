@@ -11,7 +11,7 @@ export type Matrix4AsArray = [
  * 4x4 Matrix
  */
 export class Matrix4 {
-	constructor(public elements: Matrix4AsArray) { }
+	constructor(public elements: Matrix4AsArray) {}
 
   /**
    * M(x, y) = value
@@ -21,8 +21,4 @@ export class Matrix4 {
 
     return this
   }
-
-	clone() {
-		return new Matrix4([...this.elements])
-	}
 }

@@ -14,7 +14,7 @@ export class Plane {
     public B: number,
     public C: number,
     public D: number
-  ) { }
+  ) {}
 
   static of(p1: Vector3Like, p2: Vector3Like, p3: Vector3Like): Plane {
     return new Plane(

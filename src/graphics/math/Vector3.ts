@@ -9,7 +9,7 @@ export interface Vector3Like {
 }
 
 export class Vector3 implements Vector3Like {
-  constructor(public x: number, public y: number, public z: number) { }
+  constructor(public x: number, public y: number, public z: number) {}
 
   set(index: Vector3Index, value: number): Vector3 {
     if (index === 0) this.x = value
@@ -17,14 +17,6 @@ export class Vector3 implements Vector3Like {
     else this.z = value
 
     return this
-  }
-
-  asArray(): Vector3AsArray {
-    return [this.x, this.y, this.z]
-  }
-
-  clone() {
-    return new Vector3(this.x, this.y, this.z)
   }
 
   toString(): string {

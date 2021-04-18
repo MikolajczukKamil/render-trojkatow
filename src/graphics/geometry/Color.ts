@@ -1,5 +1,3 @@
-import { Vector4AsArray } from '../math'
-
 export class Color {
   static defaultR = 0
   static defaultG = 0
@@ -23,19 +21,11 @@ export class Color {
     public buf = Infinity
   ) {}
 
-  toArray(): Vector4AsArray {
-    return [this.r, this.g, this.b, this.a]
-  }
-
   copyFrom(other: Color): void {
     this.r = other.r
     this.g = other.g
     this.b = other.b
     this.a = other.a
-  }
-
-  copy(): Color {
-    return new Color(this.r, this.g, this.b, this.a)
   }
 
   toRGBArray(): string[] {
