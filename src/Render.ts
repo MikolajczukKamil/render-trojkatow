@@ -25,6 +25,7 @@ export function Render(
   const triangles: Triangle[] = trianglesSchemas.map(
     ({ triangle, move, rotation }) =>
       triangle
+        .transform(camera.rotation)
         .transform(RPYRotation(...rotation))
         .transform(translation(...move))
   )

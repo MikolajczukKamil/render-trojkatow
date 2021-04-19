@@ -29,6 +29,6 @@ export class PerspectiveProjection implements Projection {
     this.directionV.y = -position.y
     this.directionV.z = -position.z
 
-    return this.directionV.set(camera.axis, 1)
+    return this.directionV.set(camera.axis, camera.f)
   }
 }

@@ -14,23 +14,23 @@ export const defaultValue: ParametersContextValue = {
     {
       id: -1,
       rotation: [0, 0, 0],
-      move: [0, -10, 0],
+      move: [0, 0, 0],
       triangle: Triangle.of(
         [2, 0, 0],
         [-1, -2, -1],
         [-1, 2, 1],
-        new Color(0, 150, 136, 255)
+        new Color(255, 0, 0, 255)
       ),
     },
     {
       id: -2,
       rotation: [0, 0, 0],
-      move: [0, -10, 0],
+      move: [0, 0, 0],
       triangle: Triangle.of(
         [0, 0, -2],
         [-1, -1, 2],
         [1, 1, 2],
-        new Color(255, 87, 34, 255)
+        new Color(0, 255, 0, 255)
       ),
     },
 
