@@ -2,12 +2,11 @@ import { Bitmap } from '../graphics'
 
 /**
  * Zamienia macierz kolorów na płaski ciąg bajtów
+ * @param data For cache
  */
-export function flatColors(bitmap: Bitmap): Uint8ClampedArray {
+export function flatColors(bitmap: Bitmap, data: number[]): Uint8ClampedArray {
   const height = bitmap.length
   const width = bitmap[0].length
-
-  const data = new Array(bitmap.length * bitmap[0].length * 4)
 
   for (let i = 0; i < height; i++) {
     const i4w = i * 4 * width

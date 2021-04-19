@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useMemo, useRef } from 'react'
+import React, { RefObject, useContext, useEffect, useMemo, useRef } from 'react'
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 
-import { Render } from '../Render'
-import { flatColors } from './utils'
-import { Bitmap, Camera, generateBitmap } from '../graphics'
 import { Parameters, ParametersContext } from './Parameters'
+import { useImage } from './useImage'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,39 +30,11 @@ const useStyles = makeStyles((theme: Theme) =>
 export function GraphicCanvas() {
   const classes = useStyles()
   const canvas = useRef<HTMLCanvasElement>(null)
-  const ctx = useRef<CanvasRenderingContext2D>(null)
   const {
-    axis,
-    focal,
-    pixelSize,
-    projection,
-    triangles,
     windowSize: { width, height },
   } = useContext(ParametersContext)
 
-  const bitmap: Bitmap = useMemo(() => generateBitmap(width, height), [
-    width,
-    height,
-  ])
-
-  useEffect(() => {
-    // @ts-ignore .current - readonly
-    if (!ctx.current) ctx.current = canvas.current!.getContext('2d')!
-
-    const image: Bitmap = Render(
-      triangles,
-      width,
-      height,
-      pixelSize,
-      new Camera(focal, axis),
-      projection,
-      bitmap
-    )
-
-    const imgData = new ImageData(flatColors(image), width, height)
-
-    ctx.current.putImageData(imgData, 0, 0)
-  }, [triangles, axis, focal, pixelSize, projection, width, height])
+  useImage(canvas)
 
   return (
     <Container>

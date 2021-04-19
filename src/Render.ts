@@ -10,6 +10,9 @@ import {
 } from './graphics'
 import { TriangleSchema } from './ui-components/TriangleSchema'
 
+/**
+ * @param img For cache
+ */
 export function Render(
   trianglesSchemas: TriangleSchema[],
   width: number,
