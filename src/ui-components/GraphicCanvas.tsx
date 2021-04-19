@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useMemo, useRef } from 'react'
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Container from '@material-ui/core/Container'
@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography'
 
 import { Render } from '../Render'
 import { flatColors } from './utils'
-import { Bitmap, Camera } from '../graphics'
+import { Bitmap, Camera, generateBitmap } from '../graphics'
 import { Parameters, ParametersContext } from './Parameters'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -42,6 +42,11 @@ export function GraphicCanvas() {
     windowSize: { width, height },
   } = useContext(ParametersContext)
 
+  const bitmap: Bitmap = useMemo(() => generateBitmap(width, height), [
+    width,
+    height,
+  ])
+
   useEffect(() => {
     // @ts-ignore .current - readonly
     if (!ctx.current) ctx.current = canvas.current!.getContext('2d')!
@@ -52,7 +57,8 @@ export function GraphicCanvas() {
       height,
       pixelSize,
       new Camera(focal, axis),
-      projection
+      projection,
+      bitmap
     )
 
     const imgData = new ImageData(flatColors(image), width, height)

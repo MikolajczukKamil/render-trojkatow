@@ -51,6 +51,7 @@ export class Triangle {
 }
 
 export class TriangleCompiled {
+  readonly color: Color
   readonly plane: Plane
 
   /* testInside2d config */
@@ -60,6 +61,7 @@ export class TriangleCompiled {
   private readonly WL: Vector3AsArray
 
   constructor(public readonly triangle: Triangle, camera: Camera) {
+    this.color = triangle.color
     this.plane = Plane.of(triangle.p1, triangle.p2, triangle.p3)
 
     const { p1, p2, p3 } = triangle

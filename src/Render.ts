@@ -7,7 +7,6 @@ import {
   TriangleCompiled,
   Camera,
   Bitmap,
-  generateBitmap,
 } from './graphics'
 import { TriangleSchema } from './ui-components/TriangleSchema'
 
@@ -17,7 +16,8 @@ export function Render(
   height: number,
   pixelSize: number,
   camera: Camera,
-  projection: Projection
+  projection: Projection,
+  img: Bitmap
 ): Bitmap {
   const triangles: Triangle[] = trianglesSchemas.map(
     ({ triangle, move, rotation }) =>
@@ -34,7 +34,6 @@ export function Render(
     triangle.transform(projection.transformation(camera)).compile(camera)
   )
 
-  const img = generateBitmap(width, height)
   const width2 = width / 2
   const height2 = width / 2
 
@@ -48,6 +47,8 @@ export function Render(
     for (let j = 0; j < width; j++) {
       pxV.x = (j - width2) * pixelSize
 
+      img[i][j].reset()
+
       for (let k = 0; k < transformed.length; k++) {
         const triangle = transformed[k]
 
@@ -60,7 +61,7 @@ export function Render(
 
           if (d < img[i][j].buf) {
             img[i][j].buf = d
-            img[i][j].copyFrom(triangle.triangle.color)
+            img[i][j].copyFrom(triangle.color)
           }
         }
       }
