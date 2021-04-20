@@ -20,7 +20,8 @@ export function Render(
   pixelSize: number,
   camera: Camera,
   projection: Projection,
-  img: Bitmap
+  img: Bitmap,
+  depthByTransparency = true
 ): Bitmap {
   const triangles: Triangle[] = trianglesSchemas.map(
     ({ triangle, move, rotation }) =>
@@ -45,10 +46,26 @@ export function Render(
   const pxV = new Vector3(0, 0, 0)
   pxV.set(camera.axis, camera.viewportDistance - camera.f)
 
-  let minDepth = Math.min(...transformed.map((t, k) => notTransformed[k].plane.distanceTo2(
-    t.triangle.p1,
-    projection.directionVector(t.triangle.p1, camera)
-  )))
+  let minDepth = 0
+  let maxDepth = 0
+
+  if (depthByTransparency) {
+    const distances = transformed.flatMap((t, k) =>
+      [t.triangle.p1, t.triangle.p2, t.triangle.p3].map((p) =>
+        Math.sqrt(
+          notTransformed[k].plane.distanceTo2(
+            p,
+            projection.directionVector(p, camera)
+          )
+        )
+      )
+    )
+
+    minDepth = Math.min(...distances)
+    maxDepth = Math.max(...distances)
+  }
+
+  const depthDiffrance = maxDepth - minDepth
 
   for (let i = 0; i < height; i++) {
     // Odwrotna oś Y!
@@ -64,26 +81,25 @@ export function Render(
 
         if (triangle.testInside2d(pxV)) {
           // Płaszczyzna trójkąta przed transformacją !
-          const d = notTransformed[k].plane.distanceTo2(
+          const d2 = notTransformed[k].plane.distanceTo2(
             pxV,
             projection.directionVector(pxV, camera)
           )
 
-          a.push(d)
-
-          if (d < img[i][j].buf) {
-            img[i][j].buf = d
+          if (d2 < img[i][j].buf) {
+            img[i][j].buf = d2
             img[i][j].copyFrom(triangle.color)
 
-            img[i][j].a = (d - 74) / (150 - 74) * 255
+            if (depthByTransparency) {
+              img[i][j].a = Math.round(
+                ((maxDepth - Math.sqrt(d2)) / depthDiffrance) * 255
+              )
+            }
           }
         }
       }
     }
   }
-
-  console.log(Math.min(...a))
-  console.log(Math.max(...a))
 
   return img
 }

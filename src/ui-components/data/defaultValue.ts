@@ -10,6 +10,7 @@ export const defaultValue: ParametersContextValue = {
   pixelSize: 0.01,
   focal: 5,
   axis: Axis.y,
+  depth: true,
   triangles: [
     {
       id: -1,

@@ -1,4 +1,4 @@
-import { Vector3, Matrix4 } from '../math'
+import { Vector3, Matrix4, Vector3Like } from '../math'
 import { Camera } from '../geometry'
 import { Projection } from './Projection'
 
@@ -25,7 +25,7 @@ export class PerspectiveProjection implements Projection {
   /**
    * Reverses the direction and for the axis sets f
    */
-  directionVector(position: Vector3, camera: Camera): Vector3 {
+  directionVector(position: Vector3Like, camera: Camera): Vector3 {
     this.directionV.x = position.x
     this.directionV.y = position.y
     this.directionV.z = position.z

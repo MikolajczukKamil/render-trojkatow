@@ -1,4 +1,4 @@
-import { Matrix4, Vector3 } from '../math'
+import { Matrix4, Vector3, Vector3Like } from '../math'
 import { Camera } from '../geometry'
 
 export interface Projection {
@@ -12,5 +12,5 @@ export interface Projection {
   /**
    * transformation vector
    */
-  directionVector(position: Vector3, camera: Camera): Vector3
+  directionVector(position: Vector3Like, camera: Camera): Vector3
 }

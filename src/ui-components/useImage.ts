@@ -8,6 +8,7 @@ import { ParametersContext } from './Parameters'
 export function useImage(canvas: RefObject<HTMLCanvasElement>): void {
   const {
     axis,
+    depth,
     focal,
     pixelSize,
     projection,
@@ -44,7 +45,8 @@ export function useImage(canvas: RefObject<HTMLCanvasElement>): void {
       pixelSize,
       new Camera(focal, axis),
       projection,
-      bitmap
+      bitmap,
+      depth
     )
 
     ctx.current.putImageData(
@@ -53,5 +55,5 @@ export function useImage(canvas: RefObject<HTMLCanvasElement>): void {
       0
     )
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [triangles, axis, focal, pixelSize, projection, width, height])
+  }, [triangles, axis, focal, pixelSize, projection, width, height, depth])
 }
