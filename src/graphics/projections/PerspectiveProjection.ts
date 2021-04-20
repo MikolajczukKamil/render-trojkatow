@@ -22,12 +22,12 @@ export class PerspectiveProjection implements Projection {
   }
 
   /**
-   * Reverses the direction and for the axis sets 1
+   * Reverses the direction and for the axis sets f
    */
   directionVector(position: Vector3, camera: Camera): Vector3 {
-    this.directionV.x = -position.x
-    this.directionV.y = -position.y
-    this.directionV.z = -position.z
+    this.directionV.x = position.x
+    this.directionV.y = position.y
+    this.directionV.z = position.z
 
     return this.directionV.set(camera.axis, camera.f)
   }

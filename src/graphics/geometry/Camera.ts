@@ -7,10 +7,16 @@ export enum Axis {
 }
 
 export class Camera {
-  /* Camera position from task :D */
   readonly rotation = new Matrix4([
-    -1, 0, 0, 0,
-    0, -1, 0, 10,
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, 0,
+    0, 0, 0, 1,
+  ])
+
+  readonly position = new Matrix4([
+    1, 0, 0, 0,
+    0, 1, 0, 10,
     0, 0, 1, 0,
     0, 0, 0, 1,
   ])

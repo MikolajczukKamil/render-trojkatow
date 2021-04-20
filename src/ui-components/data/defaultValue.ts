@@ -1,4 +1,4 @@
-import { Axis, Color, Triangle } from '../../graphics'
+import { Axis, Color, radToStr, Triangle, Vector3AsArray } from '../../graphics'
 import { ParametersContextValue } from '../Parameters'
 import { perspectiveProjection, SIZES } from './availableValues'
 
@@ -13,6 +13,7 @@ export const defaultValue: ParametersContextValue = {
   triangles: [
     {
       id: -1,
+      // rotation: [90, 9, 62].map(radToStr) as Vector3AsArray,
       rotation: [0, 0, 0],
       move: [0, 0, 0],
       triangle: Triangle.of(
@@ -24,6 +25,7 @@ export const defaultValue: ParametersContextValue = {
     },
     {
       id: -2,
+      // rotation: [90, 9, 62].map(radToStr) as Vector3AsArray,
       rotation: [0, 0, 0],
       move: [0, 0, 0],
       triangle: Triangle.of(

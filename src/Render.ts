@@ -7,8 +7,8 @@ import {
   TriangleCompiled,
   Camera,
   Bitmap,
-} from './graphics'
-import { TriangleSchema } from './ui-components/TriangleSchema'
+} from "./graphics"
+import { TriangleSchema } from "./ui-components/TriangleSchema"
 
 /**
  * @param img For cache
@@ -25,9 +25,10 @@ export function Render(
   const triangles: Triangle[] = trianglesSchemas.map(
     ({ triangle, move, rotation }) =>
       triangle
-        .transform(camera.rotation)
         .transform(RPYRotation(...rotation))
         .transform(translation(...move))
+        .transform(camera.rotation)
+        .transform(camera.position)
   )
 
   const notTransformed: TriangleCompiled[] = triangles.map((triangle) =>
@@ -37,6 +38,8 @@ export function Render(
   const transformed: TriangleCompiled[] = triangles.map((triangle) =>
     triangle.transform(projection.transformation(camera)).compile(camera)
   )
+
+  notTransformed.forEach((el) => console.log(el.plane))
 
   const width2 = width / 2
   const height2 = width / 2
