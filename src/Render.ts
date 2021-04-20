@@ -52,10 +52,12 @@ export function Render(
 
   for (let i = 0; i < height; i++) {
     // Odwrotna oś Y!
-    pxV.y = (height2 - i) * pixelSize
+    pxV.set(camera.verticalAxis, (height2 - i) * pixelSize)
+    // pxV.y = (height2 - i) * pixelSize
 
     for (let j = 0; j < width; j++) {
-      pxV.x = (j - width2) * pixelSize
+      pxV.set(camera.horizontalAxis, (j - width2) * pixelSize)
+      // pxV.x = (j - width2) * pixelSize
 
       img[i][j].reset()
 

@@ -8,7 +8,7 @@ export class ParallelProjection implements Projection {
   private directionV = new Vector3(0, 0, 0)
 
   /**
-   * Perspective transformation matrix
+   * Paraller transformation matrix
    */
   transformation(camera: Camera): Matrix4 {
     return new Matrix4([
