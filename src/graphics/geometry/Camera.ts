@@ -7,16 +7,9 @@ export enum Axis {
 }
 
 export class Camera {
-  readonly rotation = new Matrix4([
-    1, 0, 0, 0,
-    0, 1, 0, 0,
-    0, 0, 1, 0,
-    0, 0, 0, 1,
-  ])
-
   readonly position = new Matrix4([
     1, 0, 0, 0,
-    0, 1, 0, 10,
+    0, 1, 0, 0,
     0, 0, 1, 0,
     0, 0, 0, 1,
   ])
@@ -25,5 +18,7 @@ export class Camera {
    * @param f focal
    * @param axis viewport
    */
-  constructor(public f: number, public axis = Axis.z) {}
+  constructor(public f: number, public axis: Axis) {
+    this.position.set(3, axis, -10)
+  }
 }

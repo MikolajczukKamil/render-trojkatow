@@ -27,7 +27,6 @@ export function Render(
       triangle
         .transform(RPYRotation(...rotation))
         .transform(translation(...move))
-        .transform(camera.rotation)
         .transform(camera.position)
   )
 
@@ -39,7 +38,11 @@ export function Render(
     triangle.transform(projection.transformation(camera)).compile(camera)
   )
 
-  notTransformed.forEach((el) => console.log(el.plane))
+  // notTransformed.forEach((el) =>
+  //   console.log(
+  //     el.plane.distanceTo2({ x: -.1, y: 0, z: -.1 }, { x: 0, y: 1, z: 0 })
+  //   )
+  // )
 
   const width2 = width / 2
   const height2 = width / 2

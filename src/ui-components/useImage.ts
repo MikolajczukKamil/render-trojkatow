@@ -52,5 +52,6 @@ export function useImage(canvas: RefObject<HTMLCanvasElement>): void {
       0,
       0
     )
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [triangles, axis, focal, pixelSize, projection, width, height])
 }
