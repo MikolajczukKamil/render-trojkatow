@@ -7,8 +7,8 @@ import {
   TriangleCompiled,
   Camera,
   Bitmap,
-} from "./graphics"
-import { TriangleSchema } from "./ui-components/TriangleSchema"
+} from './graphics'
+import { TriangleSchema } from './ui-components/TriangleSchema'
 
 /**
  * @param img For cache
@@ -38,26 +38,24 @@ export function Render(
     triangle.transform(projection.transformation(camera)).compile(camera)
   )
 
-  // notTransformed.forEach((el) =>
-  //   console.log(
-  //     el.plane.distanceTo2({ x: -.1, y: 0, z: -.1 }, { x: 0, y: 1, z: 0 })
-  //   )
-  // )
-
   const width2 = width / 2
   const height2 = width / 2
 
   /* Wektor położenia obsługiwanego piksela */
   const pxV = new Vector3(0, 0, 0)
+  pxV.set(camera.axis, camera.viewportDistance - camera.f)
+
+  let minDepth = Math.min(...transformed.map((t, k) => notTransformed[k].plane.distanceTo2(
+    t.triangle.p1,
+    projection.directionVector(t.triangle.p1, camera)
+  )))
 
   for (let i = 0; i < height; i++) {
     // Odwrotna oś Y!
     pxV.set(camera.verticalAxis, (height2 - i) * pixelSize)
-    // pxV.y = (height2 - i) * pixelSize
 
     for (let j = 0; j < width; j++) {
       pxV.set(camera.horizontalAxis, (j - width2) * pixelSize)
-      // pxV.x = (j - width2) * pixelSize
 
       img[i][j].reset()
 
@@ -71,14 +69,21 @@ export function Render(
             projection.directionVector(pxV, camera)
           )
 
+          a.push(d)
+
           if (d < img[i][j].buf) {
             img[i][j].buf = d
             img[i][j].copyFrom(triangle.color)
+
+            img[i][j].a = (d - 74) / (150 - 74) * 255
           }
         }
       }
     }
   }
+
+  console.log(Math.min(...a))
+  console.log(Math.max(...a))
 
   return img
 }

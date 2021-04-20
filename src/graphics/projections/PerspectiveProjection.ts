@@ -15,10 +15,11 @@ export class PerspectiveProjection implements Projection {
       1, 0, 0, 0,
       0, 1, 0, 0,
       0, 0, 1, 0,
-      0, 0, 0, 1,
+      0, 0, 0, 0,
     ])
-    .set(camera.axis, camera.axis, 0)
-    .set(camera.axis, 3, -1 / camera.f)
+    .set(camera.axis, 3, 1 / camera.f)
+    // .set(camera.axis, camera.axis, 0)
+    // .set(camera.axis, 3, -1 / camera.f)
   }
 
   /**

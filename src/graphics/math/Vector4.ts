@@ -29,9 +29,9 @@ export class Vector4 implements Vector3Like {
     const e = M.elements
 
     return new Vector4(
-      e[0] * x + e[1] * y + e[2] * z + e[3] * w,
-      e[4] * x + e[5] * y + e[6] * z + e[7] * w,
-      e[8] * x + e[9] * y + e[10] * z + e[11] * w,
+      e[0]  * x + e[1]  * y + e[2]  * z + e[3]  * w,
+      e[4]  * x + e[5]  * y + e[6]  * z + e[7]  * w,
+      e[8]  * x + e[9]  * y + e[10] * z + e[11] * w,
       e[12] * x + e[13] * y + e[14] * z + e[15] * w
     )
   }
