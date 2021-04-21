@@ -14,8 +14,8 @@ export const defaultValue: ParametersContextValue = {
   triangles: [
     {
       id: -1,
-      // rotation: [90, 9, 62].map(radToStr) as Vector3AsArray,
-      rotation: [0, 0, 0],
+      rotation: [90, 9, 62].map(radToStr) as Vector3AsArray,
+      // rotation: [0, 0, 0],
       move: [0, 0, 0],
       triangle: Triangle.of(
         [2, 0, 0],
@@ -26,8 +26,8 @@ export const defaultValue: ParametersContextValue = {
     },
     {
       id: -2,
-      // rotation: [90, 9, 62].map(radToStr) as Vector3AsArray,
-      rotation: [0, 0, 0],
+      rotation: [90, 9, 62].map(radToStr) as Vector3AsArray,
+      // rotation: [0, 0, 0],
       move: [0, 0, 0],
       triangle: Triangle.of(
         [0, 0, -2],
