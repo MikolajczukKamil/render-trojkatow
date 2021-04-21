@@ -12,6 +12,7 @@ import { TriangleSchema } from './ui-components/TriangleSchema'
 
 /**
  * @param img For cache
+ * @param depthByTransparency Depth from max to min -> opacity from 255 to 0
  */
 export function Render(
   trianglesSchemas: TriangleSchema[],
@@ -50,8 +51,8 @@ export function Render(
   let maxDepth = 0
 
   for (let i = 0; i < height; i++) {
-    // Odwrotna oś Y!
-    pxV.set(camera.verticalAxis, (height2 - i) * pixelSize)
+    // Odwracanie osi jako obrót kamery! Tutaj zostaje odwzorowanie proste
+    pxV.set(camera.verticalAxis, (i - height2) * pixelSize)
 
     for (let j = 0; j < width; j++) {
       pxV.set(camera.horizontalAxis, (j - width2) * pixelSize)

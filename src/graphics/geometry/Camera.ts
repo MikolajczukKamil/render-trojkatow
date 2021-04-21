@@ -8,14 +8,16 @@ export enum Axis {
 
 export class Camera {
   readonly position = new Matrix4([
-    -1, 0, 0, 0,
+    1, 0, 0, 0,
     0, 1, 0, 0,
     0, 0, 1, 0,
     0, 0, 0, 1,
   ])
-  
+
   readonly verticalAxis: Axis
   readonly horizontalAxis: Axis
+
+  /* Dana z zadania */
   readonly viewportDistance = 10
 
   /**
@@ -27,5 +29,9 @@ export class Camera {
 
     this.verticalAxis = axis === Axis.z ? Axis.y : Axis.z
     this.horizontalAxis = axis === Axis.x ? Axis.y : Axis.x
+
+    /* Kierunek osi monitora jest przeciwny do współrzędnych matematycznych */
+    this.position.set(this.verticalAxis, this.verticalAxis, -1)
+    this.position.set(this.horizontalAxis, this.horizontalAxis, -1)
   }
 }
