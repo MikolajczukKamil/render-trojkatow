@@ -46,26 +46,8 @@ export function Render(
   const pxV = new Vector3(0, 0, 0)
   pxV.set(camera.axis, camera.viewportDistance - camera.f)
 
-  let minDepth = 0
+  let minDepth = Infinity
   let maxDepth = 0
-
-  if (depthByTransparency) {
-    const distances = transformed.flatMap((t, k) =>
-      [t.triangle.p1, t.triangle.p2, t.triangle.p3].map((p) =>
-        Math.sqrt(
-          notTransformed[k].plane.distanceTo2(
-            p,
-            projection.directionVector(p, camera)
-          )
-        )
-      )
-    )
-
-    minDepth = Math.min(...distances)
-    maxDepth = Math.max(...distances)
-  }
-
-  const depthDiffrance = maxDepth - minDepth
 
   for (let i = 0; i < height; i++) {
     // Odwrotna oś Y!
@@ -91,11 +73,26 @@ export function Render(
             img[i][j].copyFrom(triangle.color)
 
             if (depthByTransparency) {
-              img[i][j].a = Math.round(
-                ((maxDepth - Math.sqrt(d2)) / depthDiffrance) * 255
-              )
+              const d = Math.sqrt(d2)
+
+              minDepth = Math.min(minDepth, d)
+              maxDepth = Math.max(maxDepth, d)
             }
           }
+        }
+      }
+    }
+  }
+
+  if (depthByTransparency) {
+    const depthDiffrance = maxDepth - minDepth
+
+    for (let i = 0; i < height; i++) {
+      for (let j = 0; j < width; j++) {
+        if (img[i][j].buf !== Infinity) {
+          img[i][j].a = Math.round(
+            ((maxDepth - Math.sqrt(img[i][j].buf)) / depthDiffrance) * 255
+          )
         }
       }
     }
