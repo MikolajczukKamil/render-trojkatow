@@ -13,6 +13,7 @@ export interface ParametersContextValue {
   handleChangePixelSize?: (pixelSize: number) => void
   handleChangeAxis?: (axis: Axis) => void
   handleChangeWindowSize?: (sizeCode: string) => void
+  handleChangeDepth?: () => void
   updateTriangleSchema: (schema: TriangleSchema) => void
   addTriangleSchema: () => void
 
@@ -22,6 +23,7 @@ export interface ParametersContextValue {
   pixelSize: number
   focal: number
   axis: number
+  depth: boolean
 }
 
 export const ParametersContext = createContext<ParametersContextValue>(
@@ -39,6 +41,7 @@ function rand(min: number, max: number) {
 export function ParametersContextProvider({
   children,
 }: ParametersContextProviderProps) {
+  const [depth, setDepth] = useState(true)
   const [focal, setFocal] = useState<number>(defaultValue.focal)
   const [axis, setAxis] = useState<Axis>(defaultValue.axis)
   const [windowSize, setWindowSize] = useState<Size>(defaultValue.windowSize)
@@ -60,6 +63,7 @@ export function ParametersContextProvider({
     []
   )
   const handleChangeFocal = useCallback((f: number) => setFocal(f), [])
+  const handleChangeDepth = useCallback(() => setDepth(d => !d), [])
   const handleChangePixelSize = useCallback(
     (pxSize: number) => setPixelSize(pxSize),
     []
@@ -100,6 +104,7 @@ export function ParametersContextProvider({
         handleChangeWindowSize,
         updateTriangleSchema,
         addTriangleSchema,
+        handleChangeDepth,
 
         triangles,
         projection,
@@ -107,6 +112,7 @@ export function ParametersContextProvider({
         pixelSize,
         focal,
         axis,
+        depth,
       }}
     >
       {children}

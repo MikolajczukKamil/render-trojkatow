@@ -65,5 +65,4 @@ export const SIZES: Size[] = [
   { width: 400, height: 400, code: '400x400' },
   { width: 512, height: 512, code: '512x512' },
   { width: 1024, height: 1024, code: '1024x1024' },
-  { width: 400, height: 200, code: '400x200' },
 ]

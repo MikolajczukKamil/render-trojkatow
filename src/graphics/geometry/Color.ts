@@ -1,8 +1,5 @@
 export class Color {
-  static defaultR = 0
-  static defaultG = 0
-  static defaultB = 0
-  static defaultA = 0
+  static readonly transparent: Color = new Color(0, 0, 0, 0, 0)
 
   static random(): Color {
     return new Color(
@@ -14,11 +11,11 @@ export class Color {
   }
 
   constructor(
-    public r = Color.defaultR,
-    public g = Color.defaultG,
-    public b = Color.defaultB,
-    public a = Color.defaultA,
-    public buf = Infinity
+    public r: number = Color.transparent.r,
+    public g: number = Color.transparent.g,
+    public b: number = Color.transparent.b,
+    public a: number = Color.transparent.a,
+    public buf: number = Infinity
   ) {}
 
   copyFrom(other: Color): void {
@@ -26,6 +23,14 @@ export class Color {
     this.g = other.g
     this.b = other.b
     this.a = other.a
+  }
+
+  /**
+   * Reset to transparent
+   */
+  reset(): void {
+    this.copyFrom(Color.transparent)
+    this.buf = Infinity
   }
 
   toRGBArray(): string[] {

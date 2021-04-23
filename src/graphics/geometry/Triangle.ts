@@ -51,6 +51,7 @@ export class Triangle {
 }
 
 export class TriangleCompiled {
+  readonly color: Color
   readonly plane: Plane
 
   /* testInside2d config */
@@ -59,7 +60,8 @@ export class TriangleCompiled {
   private readonly C: Vector3AsArray
   private readonly WL: Vector3AsArray
 
-  constructor(public readonly triangle: Triangle, camera: Camera) {
+  constructor(public readonly triangle: Triangle, private camera: Camera) {
+    this.color = triangle.color
     this.plane = Plane.of(triangle.p1, triangle.p2, triangle.p3)
 
     const { p1, p2, p3 } = triangle
@@ -70,16 +72,14 @@ export class TriangleCompiled {
      * Od tego na którą płaszczyznę rzutujemy zależy które kierunki który będziemy brać
      */
 
-    const x = [
-      camera.axis !== Axis.x ? p1.x : p1.y,
-      camera.axis !== Axis.x ? p2.x : p2.y,
-      camera.axis !== Axis.x ? p3.x : p3.y,
-    ] as const
-    const y = [
-      camera.axis !== Axis.z ? p1.z : p1.y,
-      camera.axis !== Axis.z ? p2.z : p2.y,
-      camera.axis !== Axis.z ? p3.z : p3.y,
-    ] as const
+    const x =
+      camera.axis === Axis.x
+        ? ([p1.y, p2.y, p3.y] as const)
+        : ([p1.x, p2.x, p3.x] as const)
+    const y =
+      camera.axis === Axis.z
+        ? ([p1.y, p2.y, p3.y] as const)
+        : ([p1.z, p2.z, p3.z] as const)
 
     this.A = [y[2] - y[1], y[2] - y[0], y[0] - y[1]]
     this.B = [x[1] - x[2], x[0] - x[2], x[1] - x[0]]
@@ -100,10 +100,13 @@ export class TriangleCompiled {
    * @param v using only of x, y
    */
   testInside2d(v: Vector3Like): boolean {
+    const x = this.camera.axis === Axis.x ? v.y : v.x
+    const y = this.camera.axis === Axis.z ? v.y : v.z
+
     return (
-      this.WL[0] * (this.A[0] * v.x + this.B[0] * v.y + this.C[0]) >= 0 &&
-      this.WL[1] * (this.A[1] * v.x + this.B[1] * v.y + this.C[1]) >= 0 &&
-      this.WL[2] * (this.A[2] * v.x + this.B[2] * v.y + this.C[2]) >= 0
+      this.WL[0] * (this.A[0] * x + this.B[0] * y + this.C[0]) >= 0 &&
+      this.WL[1] * (this.A[1] * x + this.B[1] * y + this.C[1]) >= 0 &&
+      this.WL[2] * (this.A[2] * x + this.B[2] * y + this.C[2]) >= 0
     )
   }
 

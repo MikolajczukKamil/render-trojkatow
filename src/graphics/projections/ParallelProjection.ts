@@ -1,5 +1,5 @@
 import { Camera } from '../geometry'
-import { Vector3, Matrix4 } from '../math'
+import { Vector3, Matrix4, Vector3Like } from '../math'
 import { Projection } from './Projection'
 
 export class ParallelProjection implements Projection {
@@ -8,7 +8,7 @@ export class ParallelProjection implements Projection {
   private directionV = new Vector3(0, 0, 0)
 
   /**
-   * Perspective transformation matrix
+   * Paraller transformation matrix
    */
   transformation(camera: Camera): Matrix4 {
     return new Matrix4([
@@ -22,7 +22,7 @@ export class ParallelProjection implements Projection {
   /**
    * Set axis on 1, other 0
    */
-  directionVector(_position: Vector3, camera: Camera): Vector3 {
+  directionVector(_position: Vector3Like, camera: Camera): Vector3 {
     this.directionV.x = 0
     this.directionV.y = 0
     this.directionV.z = 0

@@ -1,6 +1,9 @@
 import React, { useContext } from 'react'
-import { Button, Typography } from '@material-ui/core'
 import MenuItem from '@material-ui/core/MenuItem'
+import Button from '@material-ui/core/Button'
+import Switch from '@material-ui/core/Switch'
+import Typography from '@material-ui/core/Typography'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
 
 import {
   AXIS,
@@ -17,11 +20,13 @@ import { SettingsControll, TriangleEditor } from './components'
 export function Parameters() {
   const {
     axis,
+    depth,
     focal,
     triangles,
     pixelSize,
     projection,
     windowSize,
+    handleChangeDepth,
     addTriangleSchema,
     handleChangeProjection,
     handleChangeFocal,
@@ -97,6 +102,17 @@ export function Parameters() {
             ))}
           </SettingsControll>
         )}
+
+        <FormControlLabel
+          control={
+            <Switch
+              checked={depth}
+              onChange={handleChangeDepth}
+              color="primary"
+            />
+          }
+          label="Odległość"
+        />
       </div>
 
       <div>

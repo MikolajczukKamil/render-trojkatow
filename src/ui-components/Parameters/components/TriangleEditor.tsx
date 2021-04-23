@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useContext, useState } from 'react'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
-import { Button } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
 import clsx from 'clsx'
 
 import { hexToRgb } from '../utils'
